@@ -15,12 +15,9 @@ public class SwaggerConfig {
 
 	@Bean
 	public Docket postsApi() {
-		return new Docket(DocumentationType.SWAGGER_2)
-				.select()
-				.paths(PathSelectors.any())
-				.apis(RequestHandlerSelectors.basePackage("com.ust.adddaystodate")).build();
+		return new Docket(DocumentationType.SWAGGER_2).select().paths(PathSelectors.any())
+				.apis(RequestHandlerSelectors.basePackage("com.ust.adddaystodate")).build()
+				.useDefaultResponseMessages(false);
 	}
-
-	
 
 }

@@ -5,9 +5,11 @@ import java.io.Serializable;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 
-public class DateCalculatorModel implements Serializable{
-	
-	
+import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
+
+public class DateCalculatorModel implements Serializable {
+
 	/**
 	 * 
 	 */
@@ -16,11 +18,10 @@ public class DateCalculatorModel implements Serializable{
 	@NotNull(message = "date value should not be null")
 	@NotEmpty(message = "date value should not be empty")
 	private String date;
-	
+
 	@NotNull(message = "days value should not be null")
 	private Integer days;
 
-	
 	public DateCalculatorModel(
 			@NotNull(message = "date value should not be null") @NotEmpty(message = "date value should not be empty") String date,
 			@NotNull(message = "days value should not be null") Integer days) {
@@ -30,8 +31,9 @@ public class DateCalculatorModel implements Serializable{
 	}
 
 	public DateCalculatorModel() {
-		
+
 	}
+
 	public String getDate() {
 		return date;
 	}
@@ -52,5 +54,5 @@ public class DateCalculatorModel implements Serializable{
 	public String toString() {
 		return "DateCalculatorModel [date=" + date + ", days=" + days + "]";
 	}
-	
+
 }

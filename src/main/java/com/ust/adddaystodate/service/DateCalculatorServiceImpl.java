@@ -33,27 +33,34 @@ public class DateCalculatorServiceImpl implements DateCalculatorService {
 	public String dateCalculator(DateCalculatorModel inputValues) {
 
 		String[] sArray = inputValues.getDate().split("/");
+
 		int day = Integer.valueOf(sArray[0]);
 		int month = Integer.valueOf(sArray[1]);
 		int year = Integer.valueOf(sArray[2]);
 		int incrementdays = inputValues.getDays();
-		if (day != 0 && day <= 31) {
-			if (month > 0 && month <= 12) {
-				if(month==2 && day>29) {
-					throw new DayorMonthNotFoundException(
-							"the feb month days should be in 1 to 29. please correct the month and try again");
+		if (incrementdays > 0) {
+			if (year >= 1000) {
+				if (day != 0 && day <= 31 && day > 0) {
+					if (month > 0 && month <= 12) {
+						if (month == 2 && day > 29) {
+							throw new DayorMonthNotFoundException(
+									"the feb month days should be in 1 to 29");
+						}
+						DateUtilityModel dateUtilityModel = addOrSubDays(day + incrementdays, month, year);
+						return dateUtilityModel.getDay() + "/" + dateUtilityModel.getMonth() + "/"
+								+ dateUtilityModel.getYear();
+					} else {
+						throw new DayorMonthNotFoundException("Month Range Exceed or Negative");
+					}
+				} else {
+					throw new DayorMonthNotFoundException("Date Range Exceed or Negative");
 				}
-				DateUtilityModel dateUtilityModel = addOrSubDays(day + incrementdays, month, year);
-				return dateUtilityModel.getDay() + "/" + dateUtilityModel.getMonth() + "/" + dateUtilityModel.getYear();
-			}
-			else {
-				throw new DayorMonthNotFoundException(
-						"Month Range Excced. Please Correct It and Try Again");
+			} else {
+				throw new DayorMonthNotFoundException("year value is invalid in the date");
 			}
 		} else {
-			throw new DayorMonthNotFoundException("Date Range Excced.. Please Correct It and Try Again");
+			throw new DayorMonthNotFoundException("days should not be negative");
 		}
-
 	}
 
 	private DateUtilityModel addOrSubDays(int days, int month, int year) {
