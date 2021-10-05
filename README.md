@@ -4,7 +4,7 @@ http://xxxxx:xxxx/adddaystodate/date
 
 input json:
 {
-"date": "30/02/2023",
+"date": "30/10/2023",
 "days": 2
 }
 
