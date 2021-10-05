@@ -8,6 +8,7 @@ import javax.validation.constraints.NotNull;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 
+@ApiModel(description = "date calculator")
 public class DateCalculatorModel implements Serializable {
 
 	/**
@@ -15,10 +16,14 @@ public class DateCalculatorModel implements Serializable {
 	 */
 	private static final long serialVersionUID = 1L;
 
+	@ApiModelProperty(notes = "Input Date", 
+            example = "11/10/2013", required = true, position = 0)
 	@NotNull(message = "date value should not be null")
 	@NotEmpty(message = "date value should not be empty")
 	private String date;
-
+	
+	@ApiModelProperty(notes = "Input Days", 
+            example = "2", required = true, position = 1)
 	@NotNull(message = "days value should not be null")
 	private Integer days;
 
