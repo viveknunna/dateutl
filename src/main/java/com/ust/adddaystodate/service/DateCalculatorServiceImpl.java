@@ -53,7 +53,7 @@ public class DateCalculatorServiceImpl implements DateCalculatorService {
 						throw new DayorMonthNotFoundException("Month Range Exceed or Negative");
 					}
 				} else {
-					throw new DayorMonthNotFoundException("Date Range Exceed or Negative");
+					throw new DayorMonthNotFoundException("Day Range Exceed or Negative");
 				}
 			} else {
 				throw new DayorMonthNotFoundException("year value is invalid in the date");
