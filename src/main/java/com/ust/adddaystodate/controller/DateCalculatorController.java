@@ -30,5 +30,12 @@ public class DateCalculatorController {
 		return dateCalculatorService.dateCalculator(inputValues);
 
 	}
+	@ApiOperation(value ="Hello")
+	@PostMapping("/hello")
+	public String hello() {
+
+		return "helloooo Bhargavi";
+
+	}
 
 }
