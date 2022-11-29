@@ -7,8 +7,8 @@ pipeline {
         stage('pre-build') {
             steps {
                 sh''' 
-                sudo rm -rf docker-java
-                git clone https://github.com/Ikrao/docker-java.git
+                sudo rm -rf dateutl
+                git clone https://github.com/viveknunna/dateutl.git
                 
                 
                 '''
@@ -17,9 +17,9 @@ pipeline {
      stage('build') {
             steps {
                 sh'''
-                cd docker-java/docker-spring-boot
+                cd dateutl
                 mvn clean package
-                sudo docker build -t spring-boot:1.0 .
+                sudo docker build -t dateutl .
                 
                 '''
             }
@@ -27,8 +27,9 @@ pipeline {
 	stage('push') {
             steps {
                 sh'''
-                sudo docker tag spring-boot:1.0 viveknunna/spring-boot:1.0
-				sudo docker push viveknunna/spring-boot:1.0
+		sudo aws ecr get-login-password --region us-east-1 | sudo docker login --username AWS --password-stdin 778322075190.dkr.ecr.us-east-1.amazonaws.com
+                sudo docker tag dateutl:latest 778322075190.dkr.ecr.us-east-1.amazonaws.com/dateutl:latest
+				sudo docker push 778322075190.dkr.ecr.us-east-1.amazonaws.com/dateutl:latest
                 '''
             }
         }
@@ -38,8 +39,8 @@ pipeline {
     
             steps {
                 sh'''
-        sudo docker stop springboot && sudo docker rm springboot
-                sudo docker run --name springboot -d -p 8090:8080 -t spring-boot:1.0
+        sudo docker stop dateutl && sudo docker rm dateutl
+                sudo docker run --name dateutl -d -p 8090:8081 -t 778322075190.dkr.ecr.us-east-1.amazonaws.com/dateutl:latest
                 echo 'containers running'
 
 
